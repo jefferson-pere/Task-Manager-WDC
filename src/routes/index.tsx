@@ -3,7 +3,7 @@ import { AppRouter } from "./app.routes";
 import { AuthRouter } from "./auth.routes";
 
 export function AppRoutes() {
-  const login = true;
+  const login = false;
   const routes = login ? <AppRouter /> : <AuthRouter />;
   return <BrowserRouter>{routes}</BrowserRouter>;
 }
