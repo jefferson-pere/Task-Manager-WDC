@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Container } from "./style";
+import { Button } from "../Button";
 
 type InputsTypes = {
   email: string;
@@ -10,7 +11,6 @@ export function FormLogin() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
     reset,
   } = useForm<InputsTypes>();
@@ -53,6 +53,7 @@ export function FormLogin() {
           </label>
           <span className="inputError">{errors.password?.message}</span>
         </section>
+        <Button title="Login" variant="PRIMARY700" loading={false} />
       </form>
     </Container>
   );
