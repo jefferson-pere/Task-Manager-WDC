@@ -8,15 +8,15 @@ export function App() {
   return (
     <Container>
       <Header />
+
       <article>
         <section className="sideBar">
           <SideBar />
         </section>
-        <Outlet />
-        {/* main pages */}
+        <Outlet /> {/* main pages */}
       </article>
+
       <Footer />
-      
     </Container>
   );
 }

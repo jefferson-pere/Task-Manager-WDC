@@ -14,6 +14,7 @@ export function FormLogin() {
     formState: { errors },
     reset,
   } = useForm<InputsTypes>();
+
   const onSubmit: SubmitHandler<InputsTypes> = async ({ email, password }) => {
     console.log({ email, password });
     reset();
@@ -53,7 +54,8 @@ export function FormLogin() {
           </label>
           <span className="inputError">{errors.password?.message}</span>
         </section>
-        <Button title="Login" variant="PRIMARY700" loading={false} />
+
+        <Button title="Login" loading={false} />
       </form>
     </Container>
   );

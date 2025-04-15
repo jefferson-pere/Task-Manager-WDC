@@ -6,6 +6,7 @@ export type ButtonStyleType = keyof AppTheme["colors"];
 type ButtonContainerStyles = {
   variant: ButtonStyleType;
 };
+
 export const Container = styled.button<ButtonContainerStyles>`
   background: ${({ theme, variant }) => theme.colors[variant]}DD;
   box-shadow: 1px 1px 1px #0004;
@@ -15,14 +16,17 @@ export const Container = styled.button<ButtonContainerStyles>`
   padding: 1.2rem;
   width: 100%;
   margin: 0 auto;
-  transition: 200ms;
+  transition: 100ms;
+
   &:hover {
     filter: brightness(0.9);
   }
+
   &:disabled {
-    filter: brightness(0.8);
     cursor: default;
+    filter: brightness(0.8);
   }
+
   @media (min-width: 768px) {
     font-size: 1.6rem;
   }

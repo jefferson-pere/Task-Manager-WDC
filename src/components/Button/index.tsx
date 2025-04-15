@@ -1,5 +1,5 @@
 import { ButtonStyleType, Container } from "./style";
-import loadsingGif from "../../assets/loading.gif";
+import loadingGif from "../../assets/loading.gif";
 
 type ButtonTypes = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   title: string;
@@ -16,13 +16,8 @@ export function Button({
   loading = false,
 }: ButtonTypes) {
   return (
-    <Container
-      onClick={onClick}
-      type={type}
-      variant={variant}
-      disabled={loading}
-    >
-      {loading ? <img src={loadsingGif} width={14} /> : title}
+    <Container type={type} variant={variant} onClick={onClick} disabled={loading}>
+      {loading ? <img src={loadingGif} width={14} /> : title}
     </Container>
   );
 }
