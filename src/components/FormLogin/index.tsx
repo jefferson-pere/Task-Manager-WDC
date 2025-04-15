@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Container } from "./style";
 import { Button } from "../Button";
+import { useAuth } from "../../hooks/useAuth";
 
 type InputsTypes = {
   email: string;
@@ -15,9 +16,14 @@ export function FormLogin() {
     reset,
   } = useForm<InputsTypes>();
 
+  const { signIn, isLoading } = useAuth();
+
   const onSubmit: SubmitHandler<InputsTypes> = async ({ email, password }) => {
-    console.log({ email, password });
-    reset();
+    const isUserLogged = await signIn({ email, password });
+
+    if (isUserLogged) {
+      reset();
+    }
   };
 
   return (
@@ -27,6 +33,7 @@ export function FormLogin() {
           <label>
             Email:
             <input
+              autoFocus
               type="email"
               placeholder="exemplo@email.com"
               {...register("email", {
@@ -55,7 +62,7 @@ export function FormLogin() {
           <span className="inputError">{errors.password?.message}</span>
         </section>
 
-        <Button title="Login" loading={false} />
+        <Button title="Login" loading={isLoading} />
       </form>
     </Container>
   );

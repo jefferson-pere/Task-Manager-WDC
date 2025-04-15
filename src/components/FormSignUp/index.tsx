@@ -18,14 +18,10 @@ export function FormSignUp() {
     reset,
   } = useForm<InputsTypes>();
 
-  const { signUp, isLoading } = useAuth();
   const navigate = useNavigate();
+  const { signUp, isLoading } = useAuth();
 
-  const onSubmit: SubmitHandler<InputsTypes> = async ({
-    name,
-    email,
-    password,
-  }) => {
+  const onSubmit: SubmitHandler<InputsTypes> = async ({ name, email, password }) => {
     const isUserCreated = await signUp({ name, email, password });
 
     if (isUserCreated) {
@@ -41,6 +37,7 @@ export function FormSignUp() {
           <label>
             Nome:
             <input
+              autoFocus
               type="text"
               placeholder="Digite seu nome"
               {...register("name", {
@@ -87,8 +84,7 @@ export function FormSignUp() {
                   message: "A senha deve ter no mínimo 7 dígitos",
                 },
                 pattern: {
-                  value:
-                    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:"<>?,./\\[\]-]).+$/,
+                  value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}|:"<>?,./\\[\]-]).+$/,
                   message:
                     "A senha deve ter número, letra maiúscula e caractere especial",
                 },
