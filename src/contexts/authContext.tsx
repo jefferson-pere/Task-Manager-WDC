@@ -1,6 +1,7 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import { API } from "../configs/api";
 import { STORAGE_USERID_KEY } from "../utils/userIdAuthKey";
+import { showToast } from "../components/Toastify/toast";
 
 export type SignInTypes = {
   email: string;
@@ -30,7 +31,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const [isLoading, setIsLoading] = useState(false);
 
   async function signIn({ email, password }: SignInTypes) {
-    if (!email || !password) throw alert("Por favor informar email e senha");
+    if (!email || !password)
+      throw showToast("Por favor informar email e senha", "info");
 
     setIsLoading(true);
 
@@ -45,7 +47,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       })
       .catch((error) => {
         console.error(error);
-        alert("Erro ao fazer login");
+        showToast("Erro ao fazer login", "error");
       })
       .finally(() => {
         setIsLoading(false);
@@ -54,21 +56,21 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   async function signUp({ name, email, password }: SignUpTypes) {
     if (!name || !email || !password)
-      throw alert("Por favor informar nome, email e senha");
+      throw showToast("Por favor informar nome, email e senha", "info");
 
     setIsLoading(true);
 
     return API.post("/user", { name, email, password })
       .then((response) => {
         if (response.status == 201) {
-          alert("Usuário cadastrado com sucesso!");
+          showToast("Usuário cadastrado com sucesso!", "success");
         }
 
         return true;
       })
       .catch((error) => {
         console.error(error);
-        alert("Erro ao cadastrar usuário");
+        showToast("Erro ao cadastrar usuário", "error");
       })
       .finally(() => {
         setIsLoading(false);

@@ -1,30 +1,39 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Container } from "./style";
-import logoReprogramaJucas from "../../assets/logo-rj.png";
+import logoReprogramaJucas from "../../assets/logo-reprograma-jucas.png";
 import { FormSignUp } from "../../components/FormSignUp";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 export function SignUp() {
   const navigate = useNavigate();
-  const [delay, setDelay] = useState(true);
-  
-    useEffect(() => {
-      const timer = setTimeout(() => {
-        setDelay(false);
-      }, 300);
-  
-      return () => clearTimeout(timer);
-    }, []);
-  
-    if (delay) {
-      return null;
-    }
-  
+  // const [delay, setDelay] = useState(true);
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setDelay(false);
+  //   }, 300);
+
+  //   return () => clearTimeout(timer);
+  // }, []);
+
+  // if (delay) {
+  //   return null;
+  // }
 
   return (
     <Container>
-      <div className="signUpForm">
-        <h2>Crie sua conta</h2>
+      <div className="signInLogo">
+        <div>
+          <h1>Task Manager</h1>
+
+          <Link to={""}>
+            <img src={logoReprogramaJucas} alt="" />
+          </Link>
+        </div>
+      </div>
+
+      <div className="signInForm">
+        <h2>Faça seu login</h2>
 
         <FormSignUp />
 
@@ -33,14 +42,6 @@ export function SignUp() {
           <button onClick={() => navigate("/")} disabled={false}>
             Login
           </button>
-        </div>
-      </div>
-
-      <div className="signUpLogo">
-        <div>
-          <Link to={""}>
-            <img src={logoReprogramaJucas} alt="" />
-          </Link>
         </div>
       </div>
     </Container>

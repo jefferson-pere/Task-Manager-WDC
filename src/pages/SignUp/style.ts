@@ -4,10 +4,23 @@ export const Container = styled.div`
   display: grid;
   place-content: center;
   height: 100vh;
-  text-align: center;
 
-  .signUpForm {
+  .signInLogo {
+    text-align: center;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    img {
+      width: 24rem;
+      filter: drop-shadow(1px 1px 1px black);
+    }
+  }
+
+  .signInForm {
     margin-top: 4.2rem;
+    text-align: center;
 
     h2 {
       font-size: 1.8rem;
@@ -32,44 +45,12 @@ export const Container = styled.div`
     }
   }
 
-  .signUpLogo {
-    text-align: center;
-
-    h1 {
-      font-size: 2rem;
-    }
-
-    img {
-      width: 4.2rem;
-      margin-top: 3.2rem;
-      filter: drop-shadow(1px 1px 1px black);
-    }
-  }
-
   @media (min-width: 768px) {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .signUpForm {
-      flex: 1;
-
-      h2 {
-        font-size: 2.4rem;
-      }
-
-      .messageChangePage {
-        span {
-          font-size: 1.6rem;
-        }
-
-        button {
-          font-size: 1.6rem;
-        }
-      }
-    }
-
-    .signUpLogo {
+    .signInLogo {
       flex: 1;
       text-align: center;
 
@@ -84,8 +65,26 @@ export const Container = styled.div`
       }
 
       img {
-        width: 36rem;
+        width: 44rem;
         filter: drop-shadow(2px 2px 2px black);
+      }
+    }
+
+    .signInForm {
+      flex: 1;
+
+      h2 {
+        font-size: 2.4rem;
+      }
+
+      .messageChangePage {
+        span {
+          font-size: 1.6rem;
+        }
+
+        button {
+          font-size: 1.6rem;
+        }
       }
     }
   }
