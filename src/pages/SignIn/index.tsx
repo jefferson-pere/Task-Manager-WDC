@@ -4,10 +4,12 @@ import logoReprogramaJucas from "../../assets/logo-reprograma-jucas.png";
 import { FormLogin } from "../../components/FormLogin";
 import { useEffect, useState } from "react";
 import { STORAGE_USERID_KEY } from "../../utils/userIdAuthKey";
+import { useAuth } from "../../hooks/useAuth";
 
 export function SignIn() {
   const navigate = useNavigate();
   const [delay, setDelay] = useState(true);
+    const {  isLoading } = useAuth();
 
   useEffect(() => {
     const token = localStorage.getItem(STORAGE_USERID_KEY);
@@ -15,7 +17,7 @@ export function SignIn() {
     if (token) {
       const timer = setTimeout(() => {
         setDelay(false);
-      }, 3000);
+      }, 300);
       console.log("delay");
 
       return () => clearTimeout(timer);
@@ -61,7 +63,7 @@ export function SignIn() {
 
         <div className="messageChangePage">
           <span>Não tem conta? </span>
-          <button onClick={() => navigate("/sign-up")} disabled={false}>
+          <button onClick={() => navigate("/sign-up")} disabled={isLoading}>
             Registre-se
           </button>
         </div>
