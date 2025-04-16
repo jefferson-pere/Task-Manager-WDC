@@ -2,10 +2,32 @@ import { Link, useNavigate } from "react-router-dom";
 import { Container } from "./style";
 import logoReprogramaJucas from "../../assets/logo-reprograma-jucas.png";
 import { FormLogin } from "../../components/FormLogin";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { STORAGE_USERID_KEY } from "../../utils/userIdAuthKey";
 
 export function SignIn() {
   const navigate = useNavigate();
+  const [delay, setDelay] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem(STORAGE_USERID_KEY);
+
+    if (token) {
+      const timer = setTimeout(() => {
+        setDelay(false);
+      }, 3000);
+      console.log("delay");
+
+      return () => clearTimeout(timer);
+    } else {
+      setDelay(false);
+    }
+  }, []);
+
+  if (delay) {
+    return null;
+  }
+  //////////////////////////////////////
   // const [delay, setDelay] = useState(true);
 
   // useEffect(() => {
