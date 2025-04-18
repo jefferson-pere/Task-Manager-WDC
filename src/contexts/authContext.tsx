@@ -42,7 +42,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         setAuthUserID(userID);
 
         localStorage.setItem(STORAGE_USERID_KEY, JSON.stringify(userID));
-
+        showToast("Login realizado com sucesso!", "success");
         return true;
       })
       .catch((error) => {

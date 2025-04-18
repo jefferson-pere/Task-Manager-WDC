@@ -9,41 +9,21 @@ import { useAuth } from "../../hooks/useAuth";
 export function SignIn() {
   const navigate = useNavigate();
   const [delay, setDelay] = useState(true);
-    const {  isLoading } = useAuth();
+  const { isLoading } = useAuth();
 
   useEffect(() => {
-    const token = localStorage.getItem(STORAGE_USERID_KEY);
-
-    if (token) {
-      const timer = setTimeout(() => {
-        setDelay(false);
-      }, 300);
-      console.log("delay");
-
-      return () => clearTimeout(timer);
-    } else {
+    const timer = setTimeout(() => {
       setDelay(false);
-    }
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, []);
 
-  if (delay) {
+  const authUserIDStorage = localStorage.getItem(STORAGE_USERID_KEY);
+
+  if (delay && authUserIDStorage) {
     return null;
   }
-  //////////////////////////////////////
-  // const [delay, setDelay] = useState(true);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setDelay(false);
-  //   }, 300);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
-
-  // if (delay) {
-  //   return null;
-  // }
-
   return (
     <Container>
       <div className="signInLogo">

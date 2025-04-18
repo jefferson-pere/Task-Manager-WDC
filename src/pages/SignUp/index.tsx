@@ -1,47 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
 import { Container } from "./style";
-import logoReprogramaJucas from "../../assets/logo-reprograma-jucas.png";
 import { FormSignUp } from "../../components/FormSignUp";
-import { useEffect, useState } from "react";
-import { STORAGE_USERID_KEY } from "../../utils/userIdAuthKey";
+import logoReprogramaJucas from "../../assets/logo-reprograma-jucas.png";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 export function SignUp() {
   const navigate = useNavigate();
-  const [delay, setDelay] = useState(true);
   const { isLoading } = useAuth();
-
-  useEffect(() => {
-    const token = localStorage.getItem(STORAGE_USERID_KEY);
-
-    if (token) {
-      const timer = setTimeout(() => {
-        setDelay(false);
-      }, 300);
-      console.log("delay");
-
-      return () => clearTimeout(timer);
-    } else {
-      setDelay(false);
-    }
-  }, []);
-
-  if (delay) {
-    return null;
-  }
-  // const [delay, setDelay] = useState(true);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setDelay(false);
-  //   }, 300);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
-
-  // if (delay) {
-  //   return null;
-  // }
 
   return (
     <Container>
