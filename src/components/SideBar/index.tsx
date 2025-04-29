@@ -10,7 +10,8 @@ type SideBarProps = {
 
 export function SideBar({ handleToggleSideBar }: SideBarProps) {
   const { data } = useQueryUser();
-  const nameUser = data?.name;
+  const userName = data?.name;
+
   const { signOut } = useAuth();
   const navigate = useNavigate();
 
@@ -45,14 +46,14 @@ export function SideBar({ handleToggleSideBar }: SideBarProps) {
         >
           close
         </i>
-        <h1>Olá, {nameUser}</h1>
         <nav>
           <ul>
+            <h1>Olá, {userName}</h1>
             <NavLink to={"/"} onClick={handleToggleSideBar}>
               <MenuItem title="Home" icon="home" />
             </NavLink>
 
-            <NavLink to={"/tasks"} onClick={handleToggleSideBar}>
+            <NavLink to={"/tasks?filter=all&page=1"} onClick={handleToggleSideBar}>
               <MenuItem title="Tarefas" icon="task" />
             </NavLink>
 

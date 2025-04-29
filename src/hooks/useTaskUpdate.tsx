@@ -4,7 +4,8 @@ import { API } from "../configs/api";
 import { toast } from "react-toastify";
 
 async function updateTask(data: TaskDataTypes) {
-  return await API.put(`/task/${data.id}`, data);
+  const { id, title, description, date, status } = data;
+  return await API.put(`/task/${id}`, { title, description, date, status });
 }
 export const useTaskUpdate = () => {
   const mutate = useMutation({

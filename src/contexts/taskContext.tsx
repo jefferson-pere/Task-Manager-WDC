@@ -12,14 +12,14 @@ interface TaskContextProps {
 
 export const TaskContext = createContext({} as TaskContextProps);
 
-export function TaskProvider({ children }: { children: ReactNode }) {
+export const TaskProvider = ({ children }: { children: ReactNode }) => {
   const [taskData, setTaskData] = useState({} as TaskDataTypes);
   const [isLoading, setIsLoading] = useState(false);
 
   async function deleteTask(id: string) {
     setIsLoading(true);
 
-    return API.delete(`/task/${id}`)
+    return await API.delete(`/task/${id}`)
       .then(() => {
         toast.dismiss();
         toast.success("Tarefa removida com sucesso!");
@@ -42,4 +42,4 @@ export function TaskProvider({ children }: { children: ReactNode }) {
       {children}
     </TaskContext.Provider>
   );
-}
+};

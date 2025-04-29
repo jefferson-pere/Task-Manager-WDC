@@ -5,12 +5,23 @@ import { Container } from "./style";
 import { TaskDataTypes } from "../../@types/tasks";
 import { Pagination } from "../../components/Pagination";
 import { ModalTaskDetails } from "../../components/ModalTaskDetails";
+import { useTask } from "../../hooks/useTask";
 
 export function Tasks() {
   const [showModalTaskDetails, setShowModalTaskDetails] = useState(false);
 
-  const { data, isLoading, error, changeLimit, page, totalPages, prevPage, nextPage } =
-    useQueryTasks();
+  const { setTaskData } = useTask();
+
+  const {
+    data,
+    isLoading,
+    error,
+    changeLimit,
+    page,
+    totalPages,
+    prevPage,
+    nextPage,
+  } = useQueryTasks();
 
   function toggleModal() {
     setShowModalTaskDetails((prev) => (prev == true ? false : true));
@@ -18,6 +29,7 @@ export function Tasks() {
 
   function addTaskToggleModal(task: TaskDataTypes) {
     toggleModal();
+    setTaskData(task);
   }
   return (
     <Container>

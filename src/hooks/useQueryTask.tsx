@@ -80,25 +80,25 @@ export function useQueryTasks() {
   }
 
   useEffect(() => {
-    if (location.pathname == "/tasks") {
-      const pageQuery = Number(searchParams[0].get("page"));
-      const filterQuery = searchParams[0].get("filter") as FilterType;
+    if (location.pathname != "/tasks") return;
 
-      setPage(pageQuery || 1);
-      setFilter(Number(filterQuery) ? filterQuery : "all");
+    const pageQuery = Number(searchParams[0].get("page"));
+    const filterQuery = searchParams[0].get("filter") as FilterType;
 
-      if (totalPages > 0) {
-        if (pageQuery > totalPages) {
-          navigate(`?page=${totalPages}&filter=${filterQuery}`);
-          setPage(totalPages);
-          return;
-        }
+    setPage(pageQuery || 1);
+    setFilter(filterQuery || "all");
 
-        if (pageQuery < 1) {
-          navigate(`?page=1&filter=${filterQuery}`);
-          setPage(1);
-          return;
-        }
+    if (totalPages > 0) {
+      if (pageQuery > totalPages) {
+        navigate(`?filter=${filterQuery}&page=${totalPages}`);
+        setPage(totalPages);
+        return;
+      }
+
+      if (pageQuery < 1) {
+        navigate(`?filter=${filterQuery}&page=1`);
+        setPage(1);
+        return;
       }
     }
   }, [page, totalPages, searchParams, navigate, location]);
@@ -106,6 +106,7 @@ export function useQueryTasks() {
   const query = useQuery({
     queryKey: ["tasksData", page, limit, filter],
     queryFn: () => getTasks({ page, limit, filter }),
+    refetchInterval: 1000 * 60 * 1, // 1 minute
   });
 
   return {

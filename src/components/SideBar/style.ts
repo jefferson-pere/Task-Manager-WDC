@@ -27,7 +27,9 @@ export const Container = styled.aside`
     }
     h1 {
       text-align: center;
-      margin-top: 3rem;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      background: ${({ theme }) => theme.colors.DARK200};
     }
 
     nav ul {
