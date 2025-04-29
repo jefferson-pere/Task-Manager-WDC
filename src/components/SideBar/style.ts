@@ -25,6 +25,10 @@ export const Container = styled.aside`
       top: 2.4rem;
       left: 2.4rem;
     }
+    h1 {
+      text-align: center;
+      margin-top: 3rem;
+    }
 
     nav ul {
       display: flex;

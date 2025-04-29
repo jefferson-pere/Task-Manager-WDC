@@ -2,12 +2,15 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { Container } from "./style";
 import { MenuItem } from "../MenuItem";
+import { useQueryUser } from "../../hooks/useQueryUser";
 
 type SideBarProps = {
   handleToggleSideBar?: () => void;
 };
 
 export function SideBar({ handleToggleSideBar }: SideBarProps) {
+  const { data } = useQueryUser();
+  const nameUser = data?.name;
   const { signOut } = useAuth();
   const navigate = useNavigate();
 
@@ -42,7 +45,7 @@ export function SideBar({ handleToggleSideBar }: SideBarProps) {
         >
           close
         </i>
-
+        <h1>Olá, {nameUser}</h1>
         <nav>
           <ul>
             <NavLink to={"/"} onClick={handleToggleSideBar}>
@@ -61,7 +64,11 @@ export function SideBar({ handleToggleSideBar }: SideBarProps) {
               <MenuItem title="Sobre" icon="info" />
             </NavLink>
 
-            <div onClick={handleLogoutApp} onKeyUp={handleLogoutKeyUp} tabIndex={0}>
+            <div
+              onClick={handleLogoutApp}
+              onKeyUp={handleLogoutKeyUp}
+              tabIndex={0}
+            >
               <MenuItem title="Sair" icon="exit_to_app" />
             </div>
           </ul>
