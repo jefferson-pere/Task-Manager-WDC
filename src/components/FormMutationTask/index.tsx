@@ -7,9 +7,9 @@ import { useEffect } from "react";
 import { useTask } from "../../hooks/useTask";
 import { updateDate3HoursAgo } from "../../utils/updateDate3HoursAgo";
 import { toast } from "react-toastify";
-import { useQueryTasks } from "../../hooks/useQueryTasks";
 import { useTaskUpdate } from "../../hooks/useTaskUpdate";
 import { TaskDataTypes } from "../../@types/tasks";
+import { useQueryTasks } from "../../hooks/useQueryTask";
 
 type Inputs = TaskDataTypes & { time: string };
 

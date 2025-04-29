@@ -1,6 +1,6 @@
-import { createContext, useState, ReactNode } from "react";
-import { TaskDataTypes } from "../@types/tasks";
+import { createContext, ReactNode, useState } from "react";
 import { API } from "../configs/api";
+import { TaskDataTypes } from "../@types/tasks";
 import { toast } from "react-toastify";
 
 interface TaskContextProps {
@@ -12,25 +12,23 @@ interface TaskContextProps {
 
 export const TaskContext = createContext({} as TaskContextProps);
 
-export const TaskProvider = ({ children }: { children: ReactNode }) => {
+export function TaskProvider({ children }: { children: ReactNode }) {
   const [taskData, setTaskData] = useState({} as TaskDataTypes);
   const [isLoading, setIsLoading] = useState(false);
 
   async function deleteTask(id: string) {
     setIsLoading(true);
-    return await API.delete(`/task/${id}`)
-      .then((response) => {
-        if (response.status == 200) {
-          toast.dismiss();
-          toast.success("Tarefa removida com sucesso!");
-          return true;
-        }
+
+    return API.delete(`/task/${id}`)
+      .then(() => {
+        toast.dismiss();
+        toast.success("Tarefa removida com sucesso!");
+        return true;
       })
       .catch((error) => {
+        console.error(error);
         toast.dismiss();
-        toast.error(
-          error.response?.data?.message || "Erro inesperado ao remover tarefa!"
-        );
+        toast.error("Erro ao remover tarefa");
       })
       .finally(() => {
         setIsLoading(false);
@@ -38,8 +36,10 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <TaskContext.Provider value={{ taskData, setTaskData, deleteTask, isLoading }}>
+    <TaskContext.Provider
+      value={{ taskData, setTaskData, deleteTask, isLoading }}
+    >
       {children}
     </TaskContext.Provider>
   );
-};
+}

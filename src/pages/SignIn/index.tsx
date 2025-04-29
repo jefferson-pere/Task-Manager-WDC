@@ -3,13 +3,12 @@ import { Container } from "./style";
 import logoReprogramaJucas from "../../assets/logo-reprograma-jucas.png";
 import { FormLogin } from "../../components/FormLogin";
 import { useEffect, useState } from "react";
-import { STORAGE_USERID_KEY } from "../../utils/userIdAuthKey";
 import { useAuth } from "../../hooks/useAuth";
 
 export function SignIn() {
   const navigate = useNavigate();
-  const [delay, setDelay] = useState(true);
   const { isLoading } = useAuth();
+  const [delay, setDelay] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,11 +18,10 @@ export function SignIn() {
     return () => clearTimeout(timer);
   }, []);
 
-  const authUserIDStorage = localStorage.getItem(STORAGE_USERID_KEY);
-
-  if (delay && authUserIDStorage) {
+  if (delay) {
     return null;
   }
+
   return (
     <Container>
       <div className="signInLogo">

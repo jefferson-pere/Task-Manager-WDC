@@ -9,6 +9,7 @@ export function Home() {
   return (
     <Container>
       <h2>Tarefas</h2>
+
       <div className="statsContainer">
         <NavLink to="/tasks?filter=completed&page=1">
           <StatsCard

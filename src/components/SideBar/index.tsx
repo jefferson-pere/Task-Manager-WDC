@@ -12,17 +12,20 @@ export function SideBar({ handleToggleSideBar }: SideBarProps) {
   const navigate = useNavigate();
 
   function handleLogoutApp() {
-    const resp = confirm("Deseja realmente sair?");
+    const resp = confirm("Deseja sair da aplicação?");
+
     if (resp) {
       signOut();
       navigate("/");
     }
   }
+
   function handleCloseKeyUp(event: React.KeyboardEvent<HTMLDivElement>) {
     if (event.key == "Enter" && handleToggleSideBar) {
       handleToggleSideBar();
     }
   }
+
   function handleLogoutKeyUp(event: React.KeyboardEvent<HTMLDivElement>) {
     if (event.key == "Enter") {
       handleLogoutApp();
@@ -39,29 +42,27 @@ export function SideBar({ handleToggleSideBar }: SideBarProps) {
         >
           close
         </i>
+
         <nav>
           <ul>
             <NavLink to={"/"} onClick={handleToggleSideBar}>
-              <MenuItem title="Home" icon="home"></MenuItem>
+              <MenuItem title="Home" icon="home" />
             </NavLink>
 
             <NavLink to={"/tasks"} onClick={handleToggleSideBar}>
-              <MenuItem title="Tarefas" icon="task"></MenuItem>
+              <MenuItem title="Tarefas" icon="task" />
             </NavLink>
 
             <NavLink to={"/create-tasks"} onClick={handleToggleSideBar}>
-              <MenuItem title="Adicionar" icon="add_circle"></MenuItem>
+              <MenuItem title="Adicionar" icon="add_circle" />
             </NavLink>
 
             <NavLink to={"/about"} onClick={handleToggleSideBar}>
-              <MenuItem title="sobre" icon="info"></MenuItem>
+              <MenuItem title="Sobre" icon="info" />
             </NavLink>
-            <div
-              onClick={handleLogoutApp}
-              onKeyUp={handleLogoutKeyUp}
-              tabIndex={0}
-            >
-              <MenuItem title="Sair" icon="exit_to_app"></MenuItem>
+
+            <div onClick={handleLogoutApp} onKeyUp={handleLogoutKeyUp} tabIndex={0}>
+              <MenuItem title="Sair" icon="exit_to_app" />
             </div>
           </ul>
         </nav>

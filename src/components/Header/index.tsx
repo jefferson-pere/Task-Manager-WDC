@@ -8,8 +8,9 @@ export function Header() {
   const [showSideBar, setShowSideBar] = useState(false);
 
   function handleToggleSideBar() {
-    setShowSideBar((preveValue) => (preveValue == true ? false : true));
+    setShowSideBar((prevValue) => (prevValue == true ? false : true));
   }
+
   function handleKeyUp(event: React.KeyboardEvent<HTMLDivElement>) {
     if (event.key == "Enter") {
       handleToggleSideBar();
@@ -26,6 +27,7 @@ export function Header() {
       >
         menu
       </i>
+
       <Link to={"/"} className="appLogo">
         <h1>Task Manager</h1>
         <img src={logoRJ} alt="logo reprograma jucas" />

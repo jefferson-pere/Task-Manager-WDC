@@ -6,6 +6,7 @@ import { appTheme } from "./styles/theme.ts";
 import { GlobalStyles } from "./styles/global.ts";
 import { AuthProvider } from "./contexts/authContext.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -17,5 +18,15 @@ createRoot(document.getElementById("root")!).render(
         </ThemeProvider>
       </AuthProvider>
     </QueryClientProvider>
+
+    <ToastContainer
+      theme="dark"
+      autoClose={3000}
+      closeOnClick={true}
+      pauseOnHover={true}
+      position="top-right"
+      pauseOnFocusLoss={false}
+      style={{zIndex: 10001}}
+    />
   </StrictMode>
 );

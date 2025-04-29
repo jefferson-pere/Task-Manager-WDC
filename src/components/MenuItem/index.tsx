@@ -5,6 +5,7 @@ type MenuProps = {
   icon: string;
   onClick?: () => void;
 };
+
 export function MenuItem({ title, icon, onClick }: MenuProps) {
   return (
     <Container>

@@ -1,7 +1,7 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import { API } from "../configs/api";
 import { STORAGE_USERID_KEY } from "../utils/userIdAuthKey";
-import { showToast } from "../components/Toastify/toast";
+import { toast } from "react-toastify";
 
 export type SignInTypes = {
   email: string;
@@ -32,7 +32,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   async function signIn({ email, password }: SignInTypes) {
     if (!email || !password)
-      throw showToast("Por favor informar email e senha", "info");
+      throw toast.info("Por favor informar email e senha");
 
     setIsLoading(true);
 
@@ -42,12 +42,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
         setAuthUserID(userID);
 
         localStorage.setItem(STORAGE_USERID_KEY, JSON.stringify(userID));
-        showToast("Login realizado com sucesso!", "success");
+
         return true;
       })
       .catch((error) => {
         console.error(error);
-        showToast("Erro ao fazer login", "error");
+        toast.error("Erro ao fazer login");
       })
       .finally(() => {
         setIsLoading(false);
@@ -56,21 +56,21 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   async function signUp({ name, email, password }: SignUpTypes) {
     if (!name || !email || !password)
-      throw showToast("Por favor informar nome, email e senha", "info");
+      throw toast.info("Por favor informar nome, email e senha");
 
     setIsLoading(true);
 
     return API.post("/user", { name, email, password })
       .then((response) => {
         if (response.status == 201) {
-          showToast("Usuário cadastrado com sucesso!", "success");
+          toast.success("Usuário cadastrado com sucesso!");
         }
 
         return true;
       })
       .catch((error) => {
         console.error(error);
-        showToast("Erro ao cadastrar usuário", "error");
+        toast.error("Erro ao cadastrar usuário");
       })
       .finally(() => {
         setIsLoading(false);
@@ -92,7 +92,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     if (userIDStorage) {
       const userID = JSON.parse(userIDStorage);
 
-      API.get(`/user`)
+      API.get("/user")
         .then((response) => {
           if (userID == response.data.id) {
             setAuthUserID(userID);
@@ -102,10 +102,14 @@ export function AuthProvider({ children }: PropsWithChildren) {
         })
         .catch((error) => {
           console.error(error);
-          if (error.response.status == 401) signOut();
+
+          if (error.response.status == 401) {
+            signOut();
+          }
         });
     }
   }, []);
+
   return (
     <AuthContext.Provider
       value={{ signIn, signOut, signUp, authUserID, isLoading }}
